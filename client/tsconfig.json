@@ -2,11 +2,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": "src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
+    "noImplicitAny": false, // remove and debug
+    "strictNullChecks": false, // remove and debug
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -19,7 +21,24 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@services/*": ["app/services/*"],
+      "@components/*": ["app/components/*"],
+      "@providers/*": ["app/providers/*"],
+      "@resolvers/*": ["app/resolvers/*"],
+      "@models/*": ["app/models/*"],
+      "@guards/*": ["app/guards/*"],
+      "@pipes/*": ["app/pipes/*"],
+      "@interceptors/*": ["app/interceptors/*"],
+      "@declarations/*": ["app/declarations/*"],
+      "@imports/*": ["app/imports/*"],
+      "@loaders/*": ["app/loaders/*"],
+      "@enums/*": ["app/enums/*"],
+      "@utilities/*": ["app/utilities/*"],
+      "@modules/*": ["modules/*"],
+      "@environments/*": ["environments/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,0 +1,39 @@
+<div class="sign-up-page-container">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="sign-up-title-container">
+            <h1 class="sign-up-title">Sign Up</h1>
+        </div>
+        <div *ngIf="submitted && authError" class="auth-error-container">
+            <div class="auth-error">{{authError}}</div>
+        </div>
+        <div class="sign-up-inputs">
+            <div class="input-container">
+                <input matInput formControlName="email" type="text" placeholder="Email">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                </div>
+            </div>
+            <div class="input-container">
+                <input matInput formControlName="password" type="password" placeholder="Password">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least {{passwordMinLength}} characters
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="forgot-my-password-container">
+            <div class="forgot-my-password">Forgot my password</div>
+        </div> -->
+        <div class="sign-up-button-container">
+            <div class="sign-up-button-inner-container">
+                <input class="sign-up-button" type="submit" value="Sign Up" [ngClass]="showLoader ? 'disabled' : ''"
+                    [disabled]="showLoader">
+                <div *ngIf="showLoader" class="loader-container">
+                    <spinning-loader class="sign-up-loader" [color]="'#7845d1'"></spinning-loader>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

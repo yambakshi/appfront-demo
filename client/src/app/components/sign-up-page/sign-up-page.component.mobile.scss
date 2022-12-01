@@ -1,0 +1,75 @@
+@import "../../../../scss/global/index.scss";
+
+@include media("screen", "<mobile") {
+    .login-page-container {
+        font-size: 18px;
+
+        > form {
+            width: 300px;
+            padding: 10px;
+            border-radius: 15px;
+
+            > .login-title-container {
+                margin-bottom: 0px;
+
+                > .login-title {
+                    margin-bottom: 10px;
+                    font-size: 26px;
+                }
+            }
+
+            > .auth-error-container {
+                margin-bottom: 5px;
+            }
+
+            > .login-inputs {
+                margin-bottom: 15px;
+
+                > .input-container {
+                    > input {
+                        font-size: 18px;
+                        line-height: 20px;
+                    }
+
+                    &:not(:last-of-type) {
+                        margin-bottom: 6px;
+                    }
+
+                    > .invalid-feedback {
+                        margin-top: 5px;
+                    }
+                }
+            }
+
+            // > .forgot-my-password-container {
+            //     margin-bottom: 10px;
+
+            //     > .forgot-my-password {
+            //         font-size: 12px;
+            //     }
+            // }
+
+            > .login-button-container {
+                margin-bottom: 6px;
+
+                > .login-button-inner-container {
+                    > .login-button {
+                        padding: 6px;
+                        font-size: 18px;
+                        border-radius: 7px;
+                    }
+
+                    > .loader-container {
+                        right: -30px;
+    
+                        > .login-loader {
+                            display: flex;
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
