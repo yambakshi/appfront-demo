@@ -1,10 +1,11 @@
+import { ImageLoad } from "./graphics";
 import { MenuItem } from "./menu-item";
 
 export class Restaurant {
     _id: string;
     name: string;
     brandColors: string[];
-    pictures: string[];
+    image: ImageLoad;
     menu: MenuItem[];
     specials: MenuItem[];
 
@@ -13,7 +14,7 @@ export class Restaurant {
         this._id = restaurant._id;
         this.name = restaurant.name;
         this.brandColors = restaurant.brandColors;
-        this.pictures = restaurant.pictures;
+        this.image = restaurant.image;
         this.menu = restaurant.menu;
         this.specials = restaurant.specials;
     }

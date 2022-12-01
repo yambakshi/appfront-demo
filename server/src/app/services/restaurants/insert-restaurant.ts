@@ -30,6 +30,6 @@ export async function insertRestaurant(restaurant: Restaurant) {
     return {
         success: true,
         message: 'Successfully boarded restaurant',
-        data: output
+        data: restaurant
     };
 }

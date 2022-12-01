@@ -5,7 +5,6 @@ import { AuthApiService } from '@services/apis';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SeoService } from '@services/seo.service';
 import { ImageInputConfig } from '@models/form-utils';
-import { Restaurant } from '@models/restaurant';
 import { ThemePalette } from '@angular/material/core';
 import { Color } from '@angular-material-components/color-picker';
 import { ApiResponse } from '@models/responses';

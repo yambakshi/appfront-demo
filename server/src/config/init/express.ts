@@ -3,8 +3,7 @@ import compression from 'compression';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import { json, urlencoded } from 'body-parser';
-import { router, authRouter } from '../routes';
-import { authMiddleware } from '../middlewares';
+import { router } from '../routes';
 import { env } from '../env';
 
 
@@ -17,7 +16,6 @@ export function configApp(app, port) {
     app.use(passport.initialize());
     app.set('port', port);
     app.use('/api', router);
-    app.use('/api', authMiddleware, authRouter);
     app.use((req, res) => {
         res.send({ success: false, message: 'Invalid request' });
     })

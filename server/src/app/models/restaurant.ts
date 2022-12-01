@@ -7,7 +7,6 @@ export class Restaurant {
     password: string;
     name: string;
     brandColors: string[];
-    pictures: ImageLoad[];
     image: ImageLoad;
     menu: MenuItem[];
     specials: MenuItem[];
@@ -18,7 +17,6 @@ export class Restaurant {
         this._id = restaurant._id;
         this.name = restaurant.name;
         this.brandColors = restaurant.brandColors;
-        this.pictures = restaurant.pictures;
         this.menu = restaurant.menu;
         this.specials = restaurant.specials;
     }

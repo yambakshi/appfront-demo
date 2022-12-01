@@ -29,6 +29,7 @@ import { ApiHttpInterceptor } from '@interceptors/api.interceptor';
 import { RecaptchaModule, RecaptchaFormsModule } from "ng-recaptcha";
 import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
 import { RestaurantsResolver } from '@resolvers/restaurants.resolver';
+import { PageNotFoundComponent } from '@components/page-not-found/page-not-found.component';
 
 
 
@@ -39,6 +40,7 @@ import { RestaurantsResolver } from '@resolvers/restaurants.resolver';
     HomePageComponent,
     SignUpPageComponent,
     SpinningLoaderComponent,
+    PageNotFoundComponent,
     ImageInput,
     CropDialog,
     ApproveDialog

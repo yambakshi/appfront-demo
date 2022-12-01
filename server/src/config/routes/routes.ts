@@ -1,8 +1,6 @@
 import { Router } from "express";
 import {
-    register,
-    // login,
-    // getPublishedRestaurant
+    register,getRestaurant
 } from '../../app/controllers';
 import { uploadFormatterMiddleware, uploadFilesMiddleware, requestTimerMiddleware } from "../middlewares";
 
@@ -18,10 +16,7 @@ router.route('/auth/sign-up')
         uploadFormatterMiddleware,
         register);
 
-// router.route('/auth/login')
-//     .post(loginMiddleware, login);
-
 // Restaurants
 
-// router.route('/published-restaurant/:restaurantId')
-//     .get(getPublishedRestaurant);
+router.route('/restaurant/:restaurantName')
+    .get(getRestaurant);

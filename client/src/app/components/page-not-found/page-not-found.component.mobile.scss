@@ -1,0 +1,6 @@
+@import "../../../scss/global/index.scss";
+
+@include media("screen", "<mobile") {
+    .page-not-found-container {
+    }
+}

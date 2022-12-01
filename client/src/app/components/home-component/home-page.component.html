@@ -1,3 +1,8 @@
-<div class="home-page-container">
-    <h1>HOME PAGE</h1>
+<div #homePageContainer class="home-page-container">
+    <div class="home-page-background-container">
+        <div class="home-page-background"></div>
+    </div>
+    <div class="home-page-content">
+        <h1>{{ restaurant ? restaurant.name : 'HOME PAGE'}}</h1>
+    </div>
 </div>

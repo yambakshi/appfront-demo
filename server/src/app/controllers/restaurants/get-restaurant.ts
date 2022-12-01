@@ -6,7 +6,7 @@ import { logger } from '../../../config';
 export async function getRestaurant(req: Request, res: Response) {
     try {
         logger.info({ message: "Received 'getRestaurant' request", label: 'getRestaurant' });
-        const query = req.params.id ? [req.params.id] : [];
+        const query = { restaurantName: req.params.restaurantName };
         const output = await queryRestaurant(query);
         res.send(output);
     } catch (error: any) {

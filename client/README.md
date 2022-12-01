@@ -1,5 +1,13 @@
 # AppfrontDemo
 
+## Technologies
+
+This project was generated with:
+- [Angular CLI](https://github.com/angular/angular-cli) 12.2.10
+- Typescript 4.3.5
+- NodeJS 12.14.1
+- NPM 6.13.4
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
 
 ## Development server
