@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthApiService } from '@services/apis';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SeoService } from '@services/seo.service';
+import { ImageInputConfig } from '@models/form-utils';
+import { Restaurant } from '@models/restaurant';
 
 @Component({
     selector: 'sign-up-page',
@@ -19,6 +21,15 @@ export class SignUpPageComponent implements OnInit {
     authError: string = '';
     passwordMinLength: number = 6;
     showLoader: boolean = false;
+    imageInputsConfigs: { [key: string]: ImageInputConfig } = {
+        image: {
+            label: 'Upload Image',
+            recommended: { width: 3000, height: 3000 },
+            ratio: { width: 1, height: 1 },
+            required: true,
+            ratioErrorCropEnabled: true
+        }
+    };
 
     constructor(
         private seoService: SeoService,
@@ -32,7 +43,11 @@ export class SignUpPageComponent implements OnInit {
     ngOnInit(): void {
         this.signUpForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(this.passwordMinLength)]]
+            password: ['', [Validators.required, Validators.minLength(this.passwordMinLength)]],
+            name: ['', [Validators.required, Validators.maxLength(80)]],
+            // pointOfSale: ['', [Validators.required]],
+            // brandColors: ['', [Validators.required]],
+            image: ['', [Validators.required]],
         });
     }
 
@@ -49,11 +64,9 @@ export class SignUpPageComponent implements OnInit {
         }
 
         this.showLoader = true;
-        await this.timeout(500);
-        this.authApiService.login({
-            email: this.signUpForm.controls.email.value,
-            password: this.signUpForm.controls.password.value
-        }).subscribe((res: { success: boolean, message: string, callingUrl: string }) => {
+
+        const restaurant = this.signUpForm.value;
+        this.authApiService.signUp(restaurant).subscribe((res: { success: boolean, message: string, callingUrl: string }) => {
             if (res.success) {
                 this.router.navigateByUrl(res.callingUrl);
             } else {

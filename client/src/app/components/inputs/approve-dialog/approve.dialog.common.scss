@@ -1,0 +1,22 @@
+.approve-dialog-container {
+    > div > p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .approve-actions-container {
+        margin-bottom: 0;
+        min-height: unset;
+        padding: 0;
+
+        > .loader-container {
+            margin-left: 8px;
+            display: flex;
+
+            > spinning-loader {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

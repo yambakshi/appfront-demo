@@ -1,0 +1,19 @@
+<form [formGroup]="cropForm" class="crop-dialog-container" (ngSubmit)="onSubmit()">
+    <h1 mat-dialog-title>{{ data.editMode ? 'Edit Image Crop' : 'Crop Image'}}</h1>
+    <div class="crop-dialog-fields-container" mat-dialog-content>
+        <div class="cropbox-outer-container">
+            <div #imageContainer class="cropbox-inner-container">
+                <img [src]="data.imgSrc" alt="image-crop">
+            </div>
+        </div>
+        <input formControlName="cropArea" type="text" hidden>
+    </div>
+    <div class="crop-actions-container" mat-dialog-actions>
+        <button mat-button mat-dialog-close cdkFocusInitial [disabled]="showLoader">Cancel</button>
+        <button mat-button color="primary" [disabled]="!cropForm.valid || !diff || showLoader" type="submit">{{
+            data.editMode ? 'Update' : 'Crop'}}</button>
+        <div *ngIf="showLoader" class="loader-container">
+            <spinning-loader class="crop-dialog-loader" [color]="'#7845d1'"></spinning-loader>
+        </div>
+    </div>
+</form>

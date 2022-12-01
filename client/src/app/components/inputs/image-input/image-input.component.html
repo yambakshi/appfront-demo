@@ -1,0 +1,31 @@
+<div class="image-field-container" (click)="fileInput.click()">
+    <mat-label *ngIf="imageError" class="upload-image-field-error">{{imageError.message}}</mat-label>
+    <div *ngIf="showImageLoader" class="image-field-loader">
+        <spinning-loader></spinning-loader>
+    </div>
+    <div #imagePreviewContainer class="image-preview-container" (click)="$event.stopPropagation()"
+        [ngStyle]="{'display': imgSrc ? 'block': 'none'}">
+        <img [src]="imgSrc" alt="image-load" (load)="onImageLoad($event.target)"
+            [ngClass]="config.cropEnabled ? '' : 'crop-disabled'" />
+        <div class="image-preview-buttons-container">
+            <div class="remove-image-button" (click)="removeImage($event)">
+                <mat-icon>delete</mat-icon>
+            </div>
+            <div *ngIf="imageLoad.cropArea" class="edit-crop-button" (click)="editCrop($event)">
+                <mat-icon>edit</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="image-field" [ngClass]="{'hidden' : imgSrc, 'error': imageError }">
+        <div class="upload-image-label" [ngStyle]="{'color': imageError ? 'red' : '#fff'}">
+            <mat-label>{{config.label}}</mat-label>
+            <mat-label *ngIf="config.required">*</mat-label>
+        </div>
+        <!-- <mat-label *ngIf="config.recommended">{{'Rec. Dimensions: ' + config.recommended.width + 'x' +
+            config.recommended.height}}</mat-label> -->
+        <mat-label>{{'Max File Size: ' + uploadRestrictions.maxFileSize + 'MB'}}</mat-label>
+        <mat-label>{{'Formats: ' + uploadRestrictions.formats.join(', ')}}
+        </mat-label>
+    </div>
+    <input #fileInput type="file" (change)="onFileChange()" [accept]="formats" hidden>
+</div>

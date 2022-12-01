@@ -22,6 +22,25 @@
                     </div>
                 </div>
             </div>
+            <mat-form-field class="restaurant-name-field-container">
+                <mat-label>Restaurant Name</mat-label>
+                <input matInput formControlName="name" type="text" maxLength="80" required>
+                <mat-error *ngIf="f.name.errors && f.name.errors.required">Name is required</mat-error>
+                <mat-error *ngIf="f.name.errors && f.name.errors.maxlength">Name must be between 1-80 characters
+                </mat-error>
+            </mat-form-field>
+            <!-- <mat-form-field class="restaurant-brand-colors-field-container">
+                <mat-label>Restaurant Brand Colors</mat-label>
+                <input matInput formControlName="barndColors" type="text" maxLength="80" required>
+                <mat-error *ngIf="f.brandColors.errors && f.brandColors.errors.required">Brand color is required</mat-error>
+            </mat-form-field> -->
+
+            <div class="graphics-fields-container">
+                <image-input class="restaurant-image-input" formControlName="image" [submitted]="submitted"
+                    [config]="imageInputsConfigs.image"></image-input>
+            </div>
+
+
         </div>
         <!-- <div class="forgot-my-password-container">
             <div class="forgot-my-password">Forgot my password</div>

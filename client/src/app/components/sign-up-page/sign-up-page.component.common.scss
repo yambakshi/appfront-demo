@@ -71,6 +71,17 @@
                     color: #dc3545;
                 }
             }
+
+            > .restaurant-name-field-container {
+                width: 100%;
+                font-size: 20px;
+            }
+
+            > .graphics-fields-container {
+                width: 300px;
+                height: 300px;
+                font-size: 20px;
+            }
         }
 
         // > .forgot-my-password-container {

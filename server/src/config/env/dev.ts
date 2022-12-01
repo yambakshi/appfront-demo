@@ -13,36 +13,13 @@ export default {
     },
     jwt: {
         secret: 'yambakshiwillnevertell',
-        issuer: 'yam-bakshi-music',
-        audience: 'yam-bakshi-music',
+        issuer: 'appfront-demo',
+        audience: 'appfront-demo',
         expiresIn: '86400000'
     },
     cloudinary: {
         cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_API_SECRET
-    },
-    googleStorage: {
-        bucketName: process.env.BUCKET_NAME
-    },
-    spotify: {
-        clientId: process.env.SPOTIFY_CLIENT_ID,
-        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    },
-    deezer: {
-        appId: process.env.DEEZER_APP_ID,
-        secretKey: process.env.DEEZER_SECRET_KEY,
-    },
-    defaultPlatforms: {
-        social: {
-            tiktok: '634d7a73420cc47bf0374a8c',
-            instagram: '634d7a73420cc47bf0374a88',
-            facebook: '634d7a73420cc47bf0374a86'
-        },
-        streaming: {
-            spotify: '634d7a73420cc47bf0374a8b',
-            appleMusic: '634d7a73420cc47bf0374a83',
-            deezer: '634d7a73420cc47bf0374a85'
-        }
     }
 }

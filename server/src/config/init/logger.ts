@@ -10,7 +10,7 @@ export const logger = createLogger({
     transports: [
         new transports.Console({ level: 'info' }),
         new transports.File({
-            filename: './log/yam-bakshi-music.log',
+            filename: './log/appfront-demo.log',
             level: 'info',
             // maxsize: 1000000,
             // maxFiles: 5,

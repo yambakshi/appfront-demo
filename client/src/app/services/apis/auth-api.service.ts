@@ -6,17 +6,18 @@ import { CookiesService } from '../cookies.service';
 import { COOKIES } from '../constants';
 import { Router } from '@angular/router';
 import { Restaurant } from '@models/restaurant';
+import * as moment from 'moment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthApiService {
+    private releaseFiles: { [key: string]: File } = {};
     private userSubject: BehaviorSubject<Restaurant>;
     private httpOptions: any = {
         headers: {},
         responseType: 'json'
     }
-    private callingUrl: string;
 
     constructor(
         private http: HttpClient,
@@ -33,10 +34,6 @@ export class AuthApiService {
         this.userSubject.next(user);
     }
 
-    setCallingUrl(callingUrl: string): void {
-        this.callingUrl = callingUrl;
-    }
-
     logout(): any {
         return this.http.post('/api/auth/logout', {}, this.httpOptions)
             .pipe(
@@ -50,18 +47,22 @@ export class AuthApiService {
                 });
     }
 
-    login(creds: { email: string, password: string }): any {
-        return this.http.post('/api/auth/login', creds, this.httpOptions)
+    signUp(restaurant: Restaurant): any {
+        this.releaseFiles = {};
+        const formData: FormData = this.objectToFormData(restaurant);
+        Object.entries(this.releaseFiles).forEach(([filename, file]) => {
+            formData.append(filename, file);
+        })
+
+        return this.http.put('/api/auth/sign-up', formData, this.httpOptions)
             .pipe(
                 map((res: any) => {
-                    const callingUrl = this.callingUrl || '/admin';
                     if (res.success) {
                         this.setUser(res.user);
                         this.cookiesService.set(COOKIES.TOKEN_KEY, res.token);
-                        this.callingUrl = null;
                     }
 
-                    return { ...res, callingUrl };
+                    return res;
                 }),
                 catchError(this.handleError));
     }
@@ -85,5 +86,41 @@ export class AuthApiService {
         // Return an observable with a user-facing error message.
         return throwError(
             'Something bad happened; please try again later.');
+    }
+
+    private objectToFormData(obj: any, form?: FormData, namespace?: string): FormData {
+        var fd: FormData = form || new FormData();
+        var formKey;
+
+        for (var property in obj) {
+            if (obj.hasOwnProperty(property) && (obj[property] !== null && obj[property] !== undefined)) {
+
+                if (namespace) {
+                    formKey = namespace + '[' + property + ']';
+                } else {
+                    formKey = property;
+                }
+
+                // if the property is an object, but not a File, use recursivity.
+                if (typeof obj[property] === 'object' &&
+                    !(obj[property] instanceof File) &&
+                    !(obj[property] instanceof Date) &&
+                    !(obj[property] instanceof moment)) {
+                    fd = this.objectToFormData(obj[property], fd, formKey);
+                } else if (obj[property] instanceof Date || obj[property] instanceof moment) {
+                    fd.append(formKey, obj[property].toISOString());
+                } else if ((obj[property] instanceof File)) {
+                    const formKeyParts = formKey.replace(/(?:(\]\[)|(\])|(\[))/g, '.').split('.');
+                    formKeyParts.splice(formKeyParts.length - 2, 2);
+                    const newFormKey = formKeyParts.join('.');
+                    this.releaseFiles[newFormKey] = obj[property];
+                } else if (property !== 'dataUrl') {
+                    // if it's a string
+                    fd.append(formKey, obj[property]);
+                }
+            }
+        }
+
+        return fd;
     }
 }

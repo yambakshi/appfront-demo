@@ -1,0 +1,34 @@
+@import "../../../../scss/global/index.scss";
+
+@include media("screen", "<mobile") {
+    .approve-dialog-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        > .mat-dialog-content {
+            > p {
+                text-align: center;
+                padding: 0 10px;
+            }
+        }
+
+        .approve-actions-container {
+            position: relative;
+
+            > .loader-container {
+                position: absolute;
+                right: -30px;
+                display: flex;
+                align-items: center;
+                margin-left: 0px;
+            }
+        }
+    }
+}

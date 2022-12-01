@@ -13,8 +13,8 @@ export default {
     },
     jwt: {
         secret: 'yambakshiwillnevertell',
-        issuer: 'yam-bakshi-music',
-        audience: 'yam-bakshi-music',
+        issuer: 'appfront-demo',
+        audience: 'appfront-demo',
         expiresIn: '86400000'
     },
     cloudinary: {
@@ -22,15 +22,4 @@ export default {
         api_key: process.env.CLOUDINARY_API_KEY,
         api_secret: process.env.CLOUDINARY_API_SECRET
     },
-    googleStorage: {
-        bucketName: process.env.BUCKET_NAME
-    },
-    spotify: {
-        clientId: process.env.SPOTIFY_CLIENT_ID,
-        clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-    },
-    deezer: {
-        appId: process.env.DEEZER_APP_ID,
-        secretKey: process.env.DEEZER_SECRET_KEY,
-    }
 }

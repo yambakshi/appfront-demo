@@ -1,0 +1,1 @@
+export { ImageInputConfig } from './image-input-config';

@@ -1,0 +1,14 @@
+<div class="approve-dialog-container">
+    <h1 mat-dialog-title>{{data.label}}</h1>
+    <div mat-dialog-content>
+        <p>Are you sure you want to remove {{data.message.before}}<b>{{data.message.bold}}</b>{{data.message.after}}?
+        </p>
+    </div>
+    <div class="approve-actions-container" mat-dialog-actions>
+        <button mat-button mat-dialog-close cdkFocusInitial [disabled]="showLoader">Cancel</button>
+        <button mat-button color="primary" (click)="onRemoveClick()" [disabled]="showLoader">Remove</button>
+        <div *ngIf="showLoader" class="loader-container">
+            <spinning-loader [color]="'#7845d1'"></spinning-loader>
+        </div>
+    </div>
+</div>

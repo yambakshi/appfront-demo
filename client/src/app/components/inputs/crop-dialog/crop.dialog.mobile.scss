@@ -1,0 +1,35 @@
+@import "../../../../scss/global/index.scss";
+
+@include media("screen", "<mobile") {
+    .crop-dialog-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+
+        > .crop-dialog-fields-container {
+            max-height: 100vh;
+            padding: 0px;
+            width: 100%;
+            flex: 1;
+            margin-bottom: 0px;
+
+            > .cropbox-outer-container {
+                height: 100%;
+                align-items: center;
+            }
+        }
+
+        .crop-actions-container {
+            position: relative;
+
+            > .loader-container {
+                position: absolute;
+                right: -30px;
+                display: flex;
+                align-items: center;
+                margin-left: 0px;
+            }
+        }
+    }
+}

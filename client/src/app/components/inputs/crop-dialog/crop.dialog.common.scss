@@ -1,0 +1,39 @@
+.crop-dialog-container {
+    .crop-dialog-fields-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        > .cropbox-outer-container {
+            display: flex;
+            justify-content: center;
+
+            > .cropbox-inner-container {
+                > img {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+    .crop-actions-container {
+        margin-bottom: 0;
+        min-height: unset;
+        padding: 0;
+
+        > .loader-container {
+            margin-left: 8px;
+
+            > .crop-dialog-loader {
+                display: flex;
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
