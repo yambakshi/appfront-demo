@@ -7,21 +7,20 @@
             <div class="auth-error">{{authError}}</div>
         </div>
         <div class="sign-up-inputs">
-            <div class="input-container">
-                <input matInput formControlName="email" type="text" placeholder="Email">
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                </div>
-            </div>
-            <div class="input-container">
-                <input matInput formControlName="password" type="password" placeholder="Password">
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
-                    <div *ngIf="f.password.errors.minlength">Password must be at least {{passwordMinLength}} characters
-                    </div>
-                </div>
-            </div>
+            <mat-form-field class="email-field-container">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" type="text" maxLength="80" required>
+                <mat-error *ngIf="f.email.errors && f.email.errors.required">Email is required</mat-error>
+                <mat-error *ngIf="f.email.errors && f.email.errors.email">Invalid email address</mat-error>
+            </mat-form-field>
+            <mat-form-field class="password-field-container">
+                <mat-label>Password</mat-label>
+                <input matInput formControlName="password" type="password" maxLength="80" required>
+                <mat-error *ngIf="f.password.errors && f.password.errors.required">Password is required</mat-error>
+                <mat-error *ngIf="f.password.errors && f.password.errors.minlength">Password must be at least
+                    {{passwordMinLength}} characters
+                </mat-error>
+            </mat-form-field>
             <mat-form-field class="restaurant-name-field-container">
                 <mat-label>Restaurant Name</mat-label>
                 <input matInput formControlName="name" type="text" maxLength="80" required>
@@ -29,22 +28,35 @@
                 <mat-error *ngIf="f.name.errors && f.name.errors.maxlength">Name must be between 1-80 characters
                 </mat-error>
             </mat-form-field>
-            <!-- <mat-form-field class="restaurant-brand-colors-field-container">
-                <mat-label>Restaurant Brand Colors</mat-label>
-                <input matInput formControlName="barndColors" type="text" maxLength="80" required>
-                <mat-error *ngIf="f.brandColors.errors && f.brandColors.errors.required">Brand color is required</mat-error>
-            </mat-form-field> -->
+
+            <mat-form-field class="restaurant-pos-field-container">
+                <mat-label>Point of Sale</mat-label>
+                <input matInput formControlName="pointOfSale" type="text" maxLength="80" required>
+                <mat-error *ngIf="f.pointOfSale.errors && f.pointOfSale.errors.required">Point of sale is required
+                </mat-error>
+            </mat-form-field>
+
+            <h1>Brand Colors</h1>
+            <div class="brand-colors-container" formArrayName="brandColors">
+                <mat-form-field *ngFor="let brandColor of brandColors.controls; let i = index"
+                    class="restaurant-brand-color-field-container">
+                    <input matInput [ngxMatColorPicker]="picker" [formControlName]="i" [disabled]="disabled">
+                    <ngx-mat-color-toggle matSuffix [for]="picker"></ngx-mat-color-toggle>
+                    <ngx-mat-color-picker #picker [touchUi]="touchUi" [color]="color"></ngx-mat-color-picker>
+                    <mat-error *ngIf="f.brandColors.errors && f.brandColors[i].errors.invalidHex">Invalid HEX
+                    </mat-error>
+                </mat-form-field>
+            </div>
 
             <div class="graphics-fields-container">
                 <image-input class="restaurant-image-input" formControlName="image" [submitted]="submitted"
                     [config]="imageInputsConfigs.image"></image-input>
             </div>
-
-
+            <div class="recaptcha-container">
+                <re-captcha (resolved)="resolved($event)" siteKey="6LegGEsjAAAAAIBasurmmonJI6WUARY6ZlJaAL2n">
+                </re-captcha>
+            </div>
         </div>
-        <!-- <div class="forgot-my-password-container">
-            <div class="forgot-my-password">Forgot my password</div>
-        </div> -->
         <div class="sign-up-button-container">
             <div class="sign-up-button-inner-container">
                 <input class="sign-up-button" type="submit" value="Sign Up" [ngClass]="showLoader ? 'disabled' : ''"

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthApiService } from '@services/apis';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SeoService } from '@services/seo.service';
 import { ImageInputConfig } from '@models/form-utils';
 import { Restaurant } from '@models/restaurant';
+import { ThemePalette } from '@angular/material/core';
+import { Color } from '@angular-material-components/color-picker';
+import { ApiResponse } from '@models/responses';
 
 @Component({
     selector: 'sign-up-page',
@@ -21,6 +24,10 @@ export class SignUpPageComponent implements OnInit {
     authError: string = '';
     passwordMinLength: number = 6;
     showLoader: boolean = false;
+    disabled = false;
+    color: ThemePalette = 'primary';
+    touchUi = false;
+    hexRegex: RegExp = /#\b[0-9A-F]{6}\b/;
     imageInputsConfigs: { [key: string]: ImageInputConfig } = {
         image: {
             label: 'Upload Image',
@@ -37,24 +44,40 @@ export class SignUpPageComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: Router,
         private snackBar: MatSnackBar) {
-        this.seoService.setTags('Login');
+        this.seoService.setTags('Sign Up');
     }
 
     ngOnInit(): void {
+        const defaultBrandColor = new Color(255, 255, 255);
         this.signUpForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(this.passwordMinLength)]],
             name: ['', [Validators.required, Validators.maxLength(80)]],
-            // pointOfSale: ['', [Validators.required]],
-            // brandColors: ['', [Validators.required]],
+            pointOfSale: ['', [Validators.required]],
+            brandColors: this.formBuilder.array(Array(3).fill(
+                this.formBuilder.control(defaultBrandColor, this.invalidHex()))
+            ),
             image: ['', [Validators.required]],
         });
     }
 
     get f() { return this.signUpForm.controls; }
 
-    timeout(ms: number) {
-        return new Promise(resolve => setTimeout(resolve, ms));
+    get brandColors(): FormArray {
+        return this.signUpForm.get('brandColors') as FormArray;
+    }
+
+    invalidHex(): ValidatorFn {
+        return (control: AbstractControl): ValidationErrors | null => {
+            if (control.value === null) return null;
+
+            const invalidHex = control.value.hex.match(this.hexRegex);
+            return invalidHex ? { invalidHex: { value: control.value } } : null;
+        };
+    }
+
+    resolved(captchaResponse: string) {
+        console.log(`Resolved captcha with response: ${captchaResponse}`);
     }
 
     async onSubmit() {
@@ -66,9 +89,9 @@ export class SignUpPageComponent implements OnInit {
         this.showLoader = true;
 
         const restaurant = this.signUpForm.value;
-        this.authApiService.signUp(restaurant).subscribe((res: { success: boolean, message: string, callingUrl: string }) => {
+        this.authApiService.signUp(restaurant).subscribe((res: ApiResponse) => {
             if (res.success) {
-                this.router.navigateByUrl(res.callingUrl);
+                this.router.navigateByUrl(`/${res.data.name}`);
             } else {
                 this.showLoader = false;
                 this.showSnackBar(res);

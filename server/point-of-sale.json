@@ -1,0 +1,22 @@
+[
+    {
+        "restaurantName": "asdf",
+        "menu": [
+            {
+                "name": "Humus",
+                "description": "Humus bowl with Tahini and Chickpeas",
+                "price": 30
+            },
+            {
+                "name": "Falafel",
+                "description": "8 Falafel balls in Pita",
+                "price": 22
+            },
+            {
+                "name": "Sabich",
+                "description": "Eggplant, egg and potatos in pita",
+                "price": 25
+            }
+        ]
+    }
+]

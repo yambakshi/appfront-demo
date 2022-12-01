@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ImageInput } from '@components/inputs/image-input/image-input.component';
 import { WindowRefService } from '@services/window-ref.service';
-import { AuthApiService } from '@services/apis';
+import { AuthApiService, RestaurantsApiService } from '@services/apis';
 import { CloudinaryService } from '@services/cloudinary.service';
 import { CookiesService } from '@services/cookies.service';
 import { SeoService } from '@services/seo.service';
@@ -26,6 +26,12 @@ import { ApproveDialog } from '@components/inputs/approve-dialog/approve.dialog'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ApiHttpInterceptor } from '@interceptors/api.interceptor';
+import { RecaptchaModule, RecaptchaFormsModule } from "ng-recaptcha";
+import { MAT_COLOR_FORMATS, NgxMatColorPickerModule, NGX_MAT_COLOR_FORMATS } from '@angular-material-components/color-picker';
+import { RestaurantsResolver } from '@resolvers/restaurants.resolver';
+
+
+
 
 @NgModule({
   declarations: [
@@ -49,6 +55,9 @@ import { ApiHttpInterceptor } from '@interceptors/api.interceptor';
     MatInputModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    NgxMatColorPickerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
   ],
@@ -58,6 +67,9 @@ import { ApiHttpInterceptor } from '@interceptors/api.interceptor';
     CookiesService,
     SeoService,
     AuthApiService,
+    RestaurantsResolver,
+    RestaurantsApiService,
+    { provide: MAT_COLOR_FORMATS, useValue: NGX_MAT_COLOR_FORMATS },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiHttpInterceptor,

@@ -1,0 +1,1 @@
+export { getPointOfSale } from './get-point-of-sale';
