@@ -8,6 +8,10 @@ This project was generated with:
 - NodeJS 12.14.1
 - NPM 6.13.4
 
+## Running
+1. Run `ng serve`
+2. Navigate to `http://localhost:4200/sign-up`
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
 
 ## Development server
